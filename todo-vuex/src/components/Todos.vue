@@ -4,7 +4,7 @@
 		<div class="todos">
 			<div class="todo" v-for="todo in getAllTodos" :key="todo.id">
 				{{ todo.title }}
-				<i class="far fa-trash-alt"></i>
+				<i class="far fa-trash-alt" @click="deleteTodo(todo.id)"></i>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@ export default {
 	},
 
 	methods: {
-		...mapActions(['fetchTodos']),
+		...mapActions(['fetchTodos', 'deleteTodo']),
 	},
 
 	created() {

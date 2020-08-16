@@ -18,11 +18,21 @@ const actions = {
 		const response = await axios.post('https://jsonplaceholder.typicode.com/todos', { title, completed: false });
 		commit('addTodo', response.data);
 	},
+
+	async deleteTodo({ commit }, id) {
+		await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+		commit('deleteTodo', id);
+	},
 };
 
 const mutations = {
 	fetchTodos: (state, todos) => (state.todos = todos),
-	addTodo: (state, todo) => state.todos.unshift(todo), //same as .push(), but will insert at the beginning of array
+
+	//same as .push(), but will insert at the beginning of array
+	addTodo: (state, todo) => state.todos.unshift(todo),
+
+	//will filter the new todos with deleted ID
+	deleteTodo: (state, id) => (state.todos = state.todos.filter((todo) => todo.id !== id)),
 };
 
 export default {
