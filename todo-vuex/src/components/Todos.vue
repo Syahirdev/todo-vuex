@@ -4,6 +4,7 @@
 		<div class="todos">
 			<div class="todo" v-for="todo in getAllTodos" :key="todo.id">
 				{{ todo.title }}
+				<i class="far fa-trash-alt"></i>
 			</div>
 		</div>
 	</div>
@@ -12,8 +13,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {
-	name: 'Todos',
-
 	computed: {
 		...mapGetters(['getAllTodos']),
 	},

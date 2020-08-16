@@ -11,12 +11,18 @@ const getters = {
 const actions = {
 	async fetchTodos({ commit }) {
 		const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
-		commit('setTodos', response.data);
+		commit('fetchTodos', response.data);
+	},
+
+	async addTodo({ commit }, title) {
+		const response = await axios.post('https://jsonplaceholder.typicode.com/todos', { title, completed: false });
+		commit('addTodo', response.data);
 	},
 };
 
 const mutations = {
-	setTodos: (state, todos) => (state.todos = todos),
+	fetchTodos: (state, todos) => (state.todos = todos),
+	addTodo: (state, todo) => state.todos.unshift(todo), //same as .push(), but will insert at the beginning of array
 };
 
 export default {
