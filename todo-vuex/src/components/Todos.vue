@@ -1,8 +1,18 @@
 <template>
 	<div>
 		<h3>Todos</h3>
+		<div class="legend">
+			<span> [ <span class="incomplete-box"></span> ] Incomplete </span>
+			<span> [ <span class="complete-box"></span> ] Complete </span>
+		</div>
 		<div class="todos">
-			<div class="todo" v-for="todo in getAllTodos" :key="todo.id">
+			<!-- prettier-ignore-->
+			<div
+				class="todo"
+				v-for="todo in getAllTodos"
+				:key="todo.id"
+				@click="updatingTodo(todo)"
+				:class="{'is-complete': todo.completed }">
 				{{ todo.title }}
 				<i class="far fa-trash-alt" @click="deleteTodo(todo.id)"></i>
 			</div>
@@ -18,7 +28,15 @@ export default {
 	},
 
 	methods: {
-		...mapActions(['fetchTodos', 'deleteTodo']),
+		...mapActions(['fetchTodos', 'deleteTodo', 'updateTodo']),
+		updatingTodo(todo) {
+			const updatedTodo = {
+				id: todo.id,
+				title: todo.title,
+				completed: !todo.completed,
+			};
+			this.updateTodo(updatedTodo);
+		},
 	},
 
 	created() {
@@ -69,7 +87,14 @@ i {
 .is-complete {
 	background: #35495e;
 	color: #fff;
+	text-decoration: line-through;
 }
+@media (max-width: 700px) {
+	.todos {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
 @media (max-width: 500px) {
 	.todos {
 		grid-template-columns: 1fr;
