@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    ".vscode": true,
+    "README.md": true,
+    "todo-vuex\\README.md": true,
+    "todo-vuex\\package-lock.json": true,
+    "todo-vuex\\babel.config.js": true,
+    "todo-vuex\\.gitignore": true,
+    "todo-vuex\\node_modules": true,
+    "todo-vuex\\package.json": true
+  }
+}
